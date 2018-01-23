@@ -1,0 +1,76 @@
+pipelines:
+  docker-hugoide:
+    group: www
+    label_template: "${git[:8]}"
+    materials:
+      git:
+        git: "git@git.ai-traders.com:www/docker-hugoide.git"
+        branch: master
+        blacklist:
+          - "**/*.md"
+    stages:
+      - build:
+          clean_workspace: true
+          jobs:
+            docker_image:
+              elastic_profile_id: w.c1.m1024.e5
+              artifacts:
+                - build:
+                    source: image/imagerc
+                    destination:
+              tasks:
+               - exec:
+                  command: /bin/bash
+                  arguments:
+                    - -c
+                    - ./tasks verify_version
+               - exec:
+                  command: /bin/bash
+                  arguments:
+                    - -c
+                    - ops_docker_push=true ./tasks build
+      - itest:
+          clean_workspace: true
+          jobs:
+            end_user:
+              elastic_profile_id: w.c1.m1024.e5
+              tasks:
+                - fetch:
+                    stage: build
+                    job: docker_image
+                    is_file: yes
+                    source: imagerc
+                    destination: image/
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks itest
+      - release:
+          clean_workspace: true
+          jobs:
+            code:
+              elastic_profile_id: w.c1.m1024.e5
+              tasks:
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks release
+      - publish:
+          clean_workspace: true
+          jobs:
+            docker_image:
+              elastic_profile_id: w.c1.m1024.e5
+              tasks:
+                - fetch:
+                    stage: build
+                    job: docker_image
+                    is_file: yes
+                    source: imagerc
+                    destination: image/
+                - exec:
+                    command: /bin/bash
+                    arguments:
+                      - -c
+                      - ./tasks publish
