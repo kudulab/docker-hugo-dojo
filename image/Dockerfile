@@ -22,6 +22,11 @@ RUN apk add --no-cache openssl &&\
 ENTRYPOINT ["/usr/bin/entrypoint.sh"]
 CMD ["/bin/bash"]
 
+# For Bash
+COPY profile /home/ide/.profile
+COPY bashrc /home/ide/.bashrc
+RUN chown ide:ide -R /home/ide
+
 ARG this_image_tag_arg
 ARG this_image_name_arg
 ENV this_image_tag=${this_image_tag_arg} this_image_name=${this_image_name_arg}
