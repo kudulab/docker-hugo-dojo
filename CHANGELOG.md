@@ -1,3 +1,7 @@
+### 0.2.1 (2019-Apr-12)
+ * use hugo extended
+ * forced to switch to debian because of libc usage
+
 ### 0.2.0 (2019-Apr-12)
 
  * updated hugo to 0.55.1
