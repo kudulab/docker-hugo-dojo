@@ -16,6 +16,6 @@ load '/opt/bats-assert/load.bash'
   run /bin/bash -c "ide --idefile Idefile.to_be_tested \"hugo version\""
   # this is printed on test failure
   echo "output: $output"
-  assert_line --partial "v0.33"
+  assert_line --partial "v0.55.1"
   assert_equal "$status" 0
 }
