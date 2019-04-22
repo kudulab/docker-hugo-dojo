@@ -1,7 +1,7 @@
 # Ensure that after shell login:
 # * some env variables are (un)set
 # * if bash shell is run, source bashrc file (used for interactive shell)
-# * ide user is in "${ide_work}"
+# * dojo user is in "${dojo_work}"
 
 # Setting PS1 here has no effect, because, for interactive shell,
 # /etc/bash.bashrc is sourced and it overrides PS1. Thus we either need to
@@ -16,4 +16,4 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # this variable is set by default IDE image scripts
-cd "${ide_work}"
+cd "${dojo_work}"

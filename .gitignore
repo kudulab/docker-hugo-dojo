@@ -1,4 +1,7 @@
 releaser
 docker-ops
 imagerc*
-Idefile.to_be_tested
+Dojofile.to_be_tested
+/ops/
+/Dojofile.example
+/test/integration/test_dojo_work/quickstart/

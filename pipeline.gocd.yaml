@@ -1,13 +1,15 @@
+format_version: 3
 pipelines:
-  docker-hugoide:
+  docker-hugo-dojo:
     group: www
     label_template: "${git[:8]}"
     materials:
       git:
-        git: "git@git.ai-traders.com:www/docker-hugoide.git"
-        branch: master
+        type: configrepo
         blacklist:
           - "**/*.md"
+    secure_variables:
+      VAULT_TOKEN: "AES:MyyeF5MFpSdZ49ajSrc81A==:AeG63Q8UlCCY9+SUzDtkhCs/981w/n0xLGmXDLPAoHHw1784eK8V6BMQrYVtFtoy"
     stages:
       - build:
           clean_workspace: true
@@ -24,12 +26,7 @@ pipelines:
                   command: /bin/bash
                   arguments:
                     - -c
-                    - ./tasks verify_version
-               - exec:
-                  command: /bin/bash
-                  arguments:
-                    - -c
-                    - ops_docker_push=true ./tasks build
+                    - ./tasks build
       - itest:
           clean_workspace: true
           jobs:

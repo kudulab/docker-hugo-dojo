@@ -4,9 +4,9 @@ Docker image with [Hugo](https://gohugo.io/) installed.
 
 ## Usage
 ```
-$ cat Idefile
-IDE_DOCKER_IMAGE="docker-registry.ai-traders.com/hugoide:0.1.0"
-IDE_DOCKER_OPTIONS="-p 1313:1313"
+$ cat Dojofile
+DOJO_DOCKER_IMAGE="docker-registry.ai-traders.com/hugoide:0.1.0"
+DOJO_DOCKER_OPTIONS="-p 1313:1313"
 $ ide "hugo"
 $ ide "hugo server -D --bind='0.0.0.0'"
 ```
