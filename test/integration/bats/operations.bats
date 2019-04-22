@@ -7,7 +7,6 @@ load '/opt/bats-assert/load.bash'
   echo "output: $output"
   assert_line --partial "dojo init finished"
   assert_line --partial "/dojo/work"
-  assert_line --partial "hugoide"
   refute_output --partial "IMAGE_VERSION"
   refute_output --partial "root"
   assert_equal "$status" 0
